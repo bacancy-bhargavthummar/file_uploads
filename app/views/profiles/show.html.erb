@@ -1,0 +1,27 @@
+<p>
+  <strong>Name:</strong>
+  <%= @profile.name %>
+</p>
+
+<strong>Pictures:</strong>
+<% @profile.picture&.each do |picture| %>
+  <p>
+    <%= image_tag(picture.url, style:"height: 300px; width:500px") %>
+    <%= link_to 'Delete', destroy_image_profiles_path(@profile, data: picture), method: :delete %> 
+  </p>
+<% end %>
+
+<div style="border-style: double;">
+  <div class="docs-div">
+    <%= render partial: "documents/show", locals: {document: @profile.documents[0]} %>
+  </div>
+  
+  <% unless @profile.documents.present? %>
+    <div class="new-docs-div">
+      <%= render template: "documents/new", locals: {document: @profile.documents.build }  %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

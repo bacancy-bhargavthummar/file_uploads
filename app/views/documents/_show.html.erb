@@ -1,0 +1,17 @@
+<% if document.present? %>
+  <p>
+    <strong>Profile:</strong>
+    <%= document.profile_id %>
+  </p>
+
+  <strong>Documents:</strong>
+  <% document.docs&.each_with_index do |docs, index| %>
+    <p>
+      <%= image_tag(docs.url, style:"height: 300px; width:500px") %>
+      <%= link_to 'Delete', profile_document_path(document.profile, document, data: docs), method: :delete %> 
+    </p>
+  <% end %>
+
+  <%= link_to 'Edit', edit_profile_document_path(document.profile, document) %> 
+
+<% end %>

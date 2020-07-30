@@ -1,0 +1,54 @@
+2002  rails g scaffold Profile name:string
+2003  rails db:migrate
+2004  rails s
+
+gem 'carrierwave'
+2005  bundle install
+
+2006  rails g migration add_picture_to_profiles picture:string
+2007  rails db:migrate
+2008  rails generate uploader Profile
+
+2009  rails s
+2010  rails d uploader Profile
+2011  rails generate uploader Picture
+2012  rails s
+2013  bundle install
+=============================================
+link: " https://medium.com/rails-ember-beyond/ajax-file-upload-in-rails-using-dropzone-and-carrierwave-6f5436fdfdb0#:~:text=DropzoneJS%20is%20an%20open%20source,Add%20it%20to%20your%20Gemfile. "
+
+gem 'popper_js'
+
+gem 'jquery-rails'
+
+gem 'bootstrap'
+
+gem 'dropzonejs-rails'
+
+yarn add jquery
+yarn add popper.js
+yarn add bootstrap
+yarn add dropzone
+yarn install
+
+application.js
+require("jquery")
+require("bootstrap")
+//= require dropzone
+
+environment.js
+const webpack = require('webpack')
+environment.plugins.prepend('Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery',
+    Popper: ['popper.js', 'default'],
+    'windows.jQuery': 'jquery'
+  })
+)
+
+application.css.scss
+*= require dropzone/dropzone
+@import "bootstrap";
+
+=================================================

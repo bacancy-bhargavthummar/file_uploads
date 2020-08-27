@@ -11,15 +11,7 @@ require("channels")
 require("jquery")
 require("bootstrap")
 require("dropzone")
-
-$(function() {
-  var mediaDropzone;
-  mediaDropzone = new Dropzone("#media-dropzone");
-  // return mediaDropzone.on("success", function(file, responseText) {
-  //   // var imageUrl;
-  //   // imageUrl = responseText.file_name.url;
-  // });
-});
+require("packs/doc_dropzone")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

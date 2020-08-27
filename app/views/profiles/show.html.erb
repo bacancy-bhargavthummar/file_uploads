@@ -13,14 +13,13 @@
 
 <div style="border-style: double;">
   <div class="docs-div">
-    <%= render partial: "documents/show", locals: {document: @profile.documents[0]} %>
+    <%= render partial: "documents/show", locals: {documents: @profile.documents} %>
   </div>
   
-  <% unless @profile.documents.present? %>
-    <div class="new-docs-div">
-      <%= render template: "documents/new", locals: {document: @profile.documents.build }  %>
-    </div>
-  <% end %>
+  <div class="new-docs-div">
+    <%= render template: "documents/new", locals: {document: @profile.documents.build }  %>
+  </div>
+
 </div>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |

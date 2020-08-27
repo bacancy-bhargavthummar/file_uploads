@@ -1,17 +1,16 @@
-<% if document.present? %>
+<% if documents.present? %>
   <p>
     <strong>Profile:</strong>
-    <%= document.profile_id %>
+    <%= @profile.id %>
   </p>
 
   <strong>Documents:</strong>
-  <% document.docs&.each_with_index do |docs, index| %>
+  <% documents&.each do |document| %>
     <p>
-      <%= image_tag(docs.url, style:"height: 300px; width:500px") %>
-      <%= link_to 'Delete', profile_document_path(document.profile, document, data: docs), method: :delete %> 
+      <%= image_tag(document.docs.url, style:"height: 300px; width:500px") %>
+      <%= link_to 'Delete', profile_document_path(@profile, document), method: :delete %> 
     </p>
+      <%= link_to 'Edit', edit_profile_document_path(@profile, document) %> 
   <% end %>
-
-  <%= link_to 'Edit', edit_profile_document_path(document.profile, document) %> 
 
 <% end %>

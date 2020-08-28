@@ -1,18 +1,18 @@
-$(document).ready(function(){  
+// $(document).ready(function(){  
 
-    Dropzone.autoDiscover = true;
-  // "myAwesomeDropzone" is the camelized version of the HTML element's ID
-    Dropzone.options.myAwesomeDropzone = {
-      autoProcessQueue: false,  
-      paramName: "docs", // The name that will be used to transfer the file
-      maxFilesize: 2, // MB
-      dictDefaultMessage : 'Testing'
-    };     
-  new Dropzone("#myAwesomeDropzone");
-  return mediaDropzone.on("success", function(file, responseText) {
-      var imageUrl;
-      imageUrl = responseText.docs.url;
-  });  
+  Dropzone.autoDiscover = true;
+  // // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+  //   Dropzone.options.myAwesomeDropzone = {
+  //     autoProcessQueue: false,  
+  //     paramName: "docs", // The name that will be used to transfer the file
+  //     maxFilesize: 2, // MB
+  //     dictDefaultMessage : 'Testing'
+  //   };     
+  // new Dropzone("#myAwesomeDropzone");
+  // return mediaDropzone.on("success", function(file, responseText) {
+  //     var imageUrl;
+  //     imageUrl = responseText.docs.url;
+  // });  
 
 // Dropzone.autoDiscover = false;
 // document.addEventListener("turbolinks:load", function () {
@@ -49,27 +49,31 @@ $(document).ready(function(){
 
 //  Disable auto upload
 
-  // Dropzone.options.myAwesomeDropzone = {
-  //   autoProcessQueue: false,
-  //   url: 'upload_files.php',
-  //   init: function () {
+  Dropzone.options.myAwesomeDropzone = {
+    autoProcessQueue: false,
+    // url: '',
+    // paramName: 'image[rendering_image]',
+    parallelUploads: 5,
+    init: function () {
 
-  //       var myDropzone = this;
+      var myDropzone = this;
+      // Update selector to match your button
+      $("#button").click(function (e) {
+        
+          e.preventDefault();
+          myDropzone.processQueue();
+      });
+      // this.on('sending', function(file, xhr, formData) {
+      //     // Append all form inputs to the formData Dropzone will POST
+      //     var data = $('#myAwesomeDropzone').serializeArray();
+      //     $.each(data, function(key, el) {
+      //         formData.append(el.name, el.value);
+      //     });
+      // });
+      this.on("queuecomplete", function () {
+        location.reload();
+      });
+    }
+  }
 
-  //       // Update selector to match your button
-  //       $("#button").click(function (e) {
-  //           e.preventDefault();
-  //           myDropzone.processQueue();
-  //       });
-
-  //       this.on('sending', function(file, xhr, formData) {
-  //           // Append all form inputs to the formData Dropzone will POST
-  //           var data = $('#frmTarget').serializeArray();
-  //           $.each(data, function(key, el) {
-  //               formData.append(el.name, el.value);
-  //           });
-  //       });
-  //   }
-  // }
-
-})
+// })

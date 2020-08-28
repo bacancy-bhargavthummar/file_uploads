@@ -10,8 +10,10 @@ require("channels")
 
 require("jquery")
 require("bootstrap")
-require("dropzone")
-require("packs/doc_dropzone")
+
+// require("dropzone")
+// require('dropzone/dist/min/dropzone.min');
+// require("packs/doc_dropzone")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

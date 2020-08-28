@@ -15,17 +15,17 @@ class DocumentsController < ApplicationController
   def create
     @profile = Profile.find(params[:profile_id])
     @document = @profile.documents.new(docs: params[:file])
-    # @document.save
-    # render :js
-    respond_to do |format|
-      if @document.save
-        format.html { redirect_to profile_path(@profile) }
-        format.js
-      else
-        format.html { redirect_to profile_path(@profile) }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
-    end
+    @document.save
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+    # respond_to do |format|
+    #   if @document.save
+
+    #     format.js
+    #   else
+    #     format.html { redirect_to profile_path(@profile) }
+    #     format.json { render json: @document.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /documents/1

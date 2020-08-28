@@ -4,29 +4,22 @@ class DocumentsController < ApplicationController
   def show
   end
 
-  # GET /documents/1/edit
   def edit
   end
 
-  # POST /documents
-  # POST /documents.json
   def create
     @profile = Profile.find(params[:profile_id])
     @document = @profile.documents.new(document_params)
-    @document.save
-    render :nothing => true, :status => 200, :content_type => 'text/html'
-    # respond_to do |format|
-    #   if @document.save
-    #     format.js
-    #   else
-    #     format.html { redirect_to profile_path(@profile) }
-    #     format.json { render json: @document.errors, status: :unprocessable_entity }
-    #   end
-    # end
+
+    respond_to do |format|
+      if @document.save
+        format.json { render json: @document, status: :created }
+      else
+        format.json { render json: @document.errors }
+      end
+    end
   end
 
-  # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
   def update
     permit_params = params.require(:document).permit(:docs)
     respond_to do |format|
@@ -38,8 +31,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.json
   def destroy
     image_path = File.join(Rails.root, 'public', @document.docs.to_s)
     File.delete(image_path) if File.exist?(image_path)
@@ -48,7 +39,6 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])
       @profile = Profile.find(params[:profile_id])

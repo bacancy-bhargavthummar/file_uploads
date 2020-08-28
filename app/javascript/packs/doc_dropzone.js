@@ -52,8 +52,11 @@
   Dropzone.options.myAwesomeDropzone = {
     autoProcessQueue: false,
     // url: '',
-    // paramName: 'image[rendering_image]',
+    paramName: 'document[docs]',
     parallelUploads: 5,
+    timeout: 5000, /*milliseconds => It has a timeout, whenever its exceded, the request gets cancelled, just put */ 
+    addRemoveLinks: true,
+
     init: function () {
 
       var myDropzone = this;
@@ -63,14 +66,13 @@
           e.preventDefault();
           myDropzone.processQueue();
       });
-      // this.on('sending', function(file, xhr, formData) {
-      //     // Append all form inputs to the formData Dropzone will POST
-      //     var data = $('#myAwesomeDropzone').serializeArray();
-      //     $.each(data, function(key, el) {
-      //         formData.append(el.name, el.value);
-      //     });
-      // });
+
+      this.on('sending', function() {
+        // $(":submit").prop("disabled", true);
+      });
+
       this.on("queuecomplete", function () {
+        // $(":submit").prop("disabled", false);
         location.reload();
       });
     }

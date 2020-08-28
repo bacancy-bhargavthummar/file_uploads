@@ -1,7 +1,5 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  # protect_from_forgery with: :null_session
-
 
   def show
   end
@@ -14,12 +12,11 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @profile = Profile.find(params[:profile_id])
-    @document = @profile.documents.new(docs: params[:file])
+    @document = @profile.documents.new(document_params)
     @document.save
     render :nothing => true, :status => 200, :content_type => 'text/html'
     # respond_to do |format|
     #   if @document.save
-
     #     format.js
     #   else
     #     format.html { redirect_to profile_path(@profile) }
@@ -56,5 +53,8 @@ class DocumentsController < ApplicationController
       @document = Document.find(params[:id])
       @profile = Profile.find(params[:profile_id])
     end
-    
+
+    def document_params
+      params.require(:document).permit(:docs)
+    end
 end

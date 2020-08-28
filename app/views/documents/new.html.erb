@@ -1,12 +1,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
 
 <%= javascript_pack_tag 'doc_dropzone' %>
-<%= form_with(model: document, url: profile_documents_path(document.profile), method: :post, html: { multipart: true, class: 'dropzone', id: 'myAwesomeDropzone'}) do |form| %>
+<%= form_with(model: document, url: profile_documents_path(document.profile), html: { multipart: true, class: 'dropzone', id: 'myAwesomeDropzone'}) do |form| %>
 
   <div class= "fallback" >
     <%= form.file_field :docs, multiple: true %>
   </div>
   
-  <%= link_to 'Submit', "#", id: 'button', class: 'btn btn-success'  %>
+  <%= button_to 'Submit', "#", id: 'button', class: 'btn btn-success'  %>
 
 <% end %>
